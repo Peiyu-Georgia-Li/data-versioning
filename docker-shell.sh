@@ -4,7 +4,7 @@ set -e
 
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../secrets/
-export GCS_BUCKET_NAME="cheese-app-data-versioning"
+export GCS_BUCKET_NAME="cheese-bucket-ac215"
 export GCP_PROJECT="ac215-project"
 export GCP_ZONE="us-central1-a"
 export GOOGLE_APPLICATION_CREDENTIALS="/secrets/data-service-account.json"
@@ -15,8 +15,8 @@ docker build -t data-version-cli -f Dockerfile .
 
 echo "Running container"
 docker run --rm --name data-version-cli -ti \
---privileged \
---cap-add SYS_ADMIN \
+	       --privileged \
+	       --cap-add SYS_ADMIN \
 --device /dev/fuse \
 -v "$BASE_DIR":/app \
 -v "$SECRETS_DIR":/secrets \
